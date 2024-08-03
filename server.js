@@ -1,5 +1,5 @@
 const express = require('express');
-const socketIo = require('socket.io');
+const WebSocket = require('ws');
 const http = require('http');
 
 const app = express();
@@ -13,6 +13,7 @@ wss.on('connection', (ws) => {
     // Event listener for incoming messages
     ws.on('message', (message) => {
         console.log('Received message:', message.toString());
+
 
         // Broadcast the message to all connected clients
         wss.clients.forEach((client) => {
