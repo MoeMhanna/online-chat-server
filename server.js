@@ -5,7 +5,8 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 
-const wss = new WebSocket.Server({port: 8080});
+// Create WebSocket server on top of the existing HTTP server
+const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
     console.log('A new client connected.');
@@ -25,7 +26,13 @@ wss.on('connection', (ws) => {
     });
 });
 
+// Define a simple route to serve as an endpoint
+app.get('/', (req, res) => {
+    res.send('WebSocket server is running');
+});
+
+// Start the server on a specific port
 const port = 3000;
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
 });
