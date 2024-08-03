@@ -10,12 +10,9 @@ const wss = new WebSocket.Server({port: 8080});
 wss.on('connection', (ws) => {
     console.log('A new client connected.');
 
-    // Event listener for incoming messages
     ws.on('message', (message) => {
         console.log('Received message:', message.toString());
 
-
-        // Broadcast the message to all connected clients
         wss.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
                 client.send(message.toString());
@@ -23,7 +20,6 @@ wss.on('connection', (ws) => {
         });
     });
 
-    // Event listener for client disconnection
     ws.on('close', () => {
         console.log('A client disconnected.');
     });
