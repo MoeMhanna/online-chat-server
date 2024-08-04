@@ -7,7 +7,7 @@ class UserServices {
         return this.userRepository.findAll();
     }
 
-    createUser(data) {
+    createUser(data,profilePicture) {
         const {email} = data.email;
         if (this.getUserByEmail(email)) {
             throw new Error("User already exists");

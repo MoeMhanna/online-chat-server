@@ -20,7 +20,11 @@ class UsersController {
             if (error) {
                 return res.status(400).json({message: error.details.map(detail => detail.message).join(', ')});
             }
-            const user = await this.userService.createUser(req.body);
+            const user = await this.userService.createUser({
+                    ...req.body,
+                    profilePicture: req.file ? `/uploads/${req.file.filename}` : ''
+                }
+            );
             res.status(201).json(user);
         } catch (error) {
             res.status(409).json({message: error.message});
