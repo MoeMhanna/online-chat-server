@@ -1,16 +1,18 @@
 const express = require("express")
-const mongoose = require("mongoose")
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
+const container = require('./di-container');
+const connectDB = require('./database');
 
 const app = express()
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://hamoud:4MuTZs8YoC2SrcJP@atlascluster.4krdcpb.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster")
-    .then(() => {
-        console.log("connected to database successfully");
-    })
-    .catch((err) => {
-        console.log(err)
-    });
+connectDB();
+
+
+const userRoutes = require('./routes/user-routes')(container.cradle);
+app.use('/api/users', userRoutes);
+
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000")
