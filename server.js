@@ -1,6 +1,4 @@
 const express = require("express")
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger');
 const container = require('./di-container');
 const connectDB = require('./database');
 
