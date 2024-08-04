@@ -1,38 +1,17 @@
-const express = require('express');
-const WebSocket = require('ws');
-const http = require('http');
+const express = require("express")
+const mongoose = require("mongoose")
 
-const app = express();
-const server = http.createServer(app);
+const app = express()
+app.use(express.json())
 
-// Create WebSocket server on top of the existing HTTP server
-const wss = new WebSocket.Server({ server });
-
-wss.on('connection', (ws) => {
-    console.log('A new client connected.');
-
-    ws.on('message', (message) => {
-        console.log('Received message:', message.toString());
-
-        wss.clients.forEach((client) => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(message.toString());
-            }
-        });
+mongoose.connect("mongodb+srv://hamoud:4MuTZs8YoC2SrcJP@atlascluster.4krdcpb.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster")
+    .then(() => {
+        console.log("connected to database successfully");
+    })
+    .catch((err) => {
+        console.log(err)
     });
 
-    ws.on('close', () => {
-        console.log('A client disconnected.');
-    });
-});
-
-// Define a simple route to serve as an endpoint
-app.get('/', (req, res) => {
-    res.send('WebSocket server is running');
-});
-
-// Start the server on a specific port
-const port = 3000;
-server.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
-});
+app.listen(3000, () => {
+    console.log("Server is running on port 3000")
+})
