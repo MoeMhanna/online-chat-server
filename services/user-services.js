@@ -7,8 +7,8 @@ class UserServices {
         return this.userRepository.findAll();
     }
 
-    createUser(data,profilePicture) {
-        const {email} = data.email;
+    createUser(data) {
+        const email = data.email;
         if (this.getUserByEmail(email)) {
             throw new Error("User already exists");
         }
@@ -16,8 +16,14 @@ class UserServices {
         return this.userRepository.create(data);
     }
 
-    getUserByEmail(email) {
-        return this.userRepository.findByEmail(email);
+    async getUserByEmail(email) {
+        try {
+            await this.userRepository.findByEmail(email);
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false
+        }
     }
 }
 
