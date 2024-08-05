@@ -14,7 +14,8 @@ class UserRepository {
     }
 
     findByEmail(email) {
-        return UserModel.findOne({email});
+        console.log(email);
+        return UserModel.findOne({ email: email });
     }
 }
 

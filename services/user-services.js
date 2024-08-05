@@ -7,17 +7,22 @@ class UserServices {
         return this.userRepository.findAll();
     }
 
-    createUser(data) {
-        const {email} = data.email;
-        if (this.getUserByEmail(email)) {
+    async createUser(data) {
+        const email = data.email;
+        if (await this.getUserByEmail(email)) {
             throw new Error("User already exists");
         }
-
         return this.userRepository.create(data);
     }
 
-    getUserByEmail(email) {
-        return this.userRepository.findByEmail(email);
+    async getUserByEmail(email) {
+        try {
+             const user = await this.userRepository.findByEmail(email);
+            return !!user;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
     }
 }
 

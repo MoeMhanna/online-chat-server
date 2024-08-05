@@ -1,5 +1,9 @@
 const mongoose = require("mongoose")
 const schema = mongoose.Schema
+const profilePictureSchema = new mongoose.Schema({
+    data: Buffer,
+    contentType: String,
+});
 
 const userSchema = new schema({
     name: {
@@ -20,10 +24,7 @@ const userSchema = new schema({
         minlength: 3,
         maxlength: 1024
     },
-    profilePicture: {
-        type: String,
-        required: false,
-    }
+    profilePicture: profilePictureSchema
 })
 
 const UserModel = mongoose.model("User", userSchema)
