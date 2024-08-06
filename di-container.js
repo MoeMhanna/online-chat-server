@@ -6,6 +6,9 @@ container.register({
     userController: asClass(require('./controllers/users-controllers')).singleton(),
     userServices: asClass(require('./services/user-services')).singleton(),
     userRepository: asClass(require('./repositories/user-repository')).singleton(),
+    messagesController: asClass(require('./controllers/messages-controller')).singleton(),
+    messagesServices: asClass(require('./services/messages-service')).singleton(),
+    messagesRepository: asClass(require('./repositories/messages-repository')).singleton(),
 })
 
 module.exports = container;
