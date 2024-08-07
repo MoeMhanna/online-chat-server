@@ -8,11 +8,11 @@ const messageSchema = new Schema({
             required: true
         }
     },
-    users: {
-        type: [String],
+    sender: {
+        type: String,
         required: true
     },
-    sender: {
+    receiver: {
         type: String,
         required: true
     }

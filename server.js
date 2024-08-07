@@ -18,6 +18,8 @@ setupChatSocket(server);
 const userRoutes = require('./routes/user-routes')(container.cradle);
 app.use('/api/users', userRoutes);
 
+const messageRoutes = require('./routes/messages-routes')(container.cradle);
+app.use('/api/messages', messageRoutes);
 
 server.listen(process.env.PORT, () => {
     console.log("Server is running on port 3000")
