@@ -4,6 +4,7 @@ class MessagesService {
     }
 
     async getMessages(from, to) {
+
         const messages = await this.messagesRepository.getMessages(from, to);
         return messages.map((msg) => ({
             fromSelf: msg.sender === from,
