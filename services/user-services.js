@@ -9,7 +9,7 @@ class UserServices {
 
     async createUser(data) {
         const email = data.email;
-        if (await this.getUserByEmail(email)) {
+        if (!!(await this.getUserByEmail(email))) {
             throw new Error("User already exists");
         }
         return this.userRepository.create(data);
@@ -17,8 +17,7 @@ class UserServices {
 
     async getUserByEmail(email) {
         try {
-            const user = await this.userRepository.findByEmail(email);
-            return !!user;
+            return await this.userRepository.findByEmail(email);
         } catch (err) {
             console.log(err);
             return false;

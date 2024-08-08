@@ -6,7 +6,7 @@ const profilePictureSchema = new mongoose.Schema({
 });
 
 const userSchema = new schema({
-    name: {
+    username: {
         type: String,
         required: true,
         minlength: 3,

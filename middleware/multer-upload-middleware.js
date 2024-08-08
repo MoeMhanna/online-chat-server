@@ -1,4 +1,4 @@
-// middleware/multer-upload.js
+// middleware/multer-upload-middleware.js
 const multer = require('multer');
 const path = require('path');
 

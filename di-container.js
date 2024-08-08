@@ -3,6 +3,7 @@ const {createContainer, asClass, asFunction, asValue} = require('awilix');
 const container = createContainer();
 
 container.register({
+    authController: asClass(require('./controllers/authentication-controller')).singleton(),
     userController: asClass(require('./controllers/users-controllers')).singleton(),
     userServices: asClass(require('./services/user-services')).singleton(),
     userRepository: asClass(require('./repositories/user-repository')).singleton(),
