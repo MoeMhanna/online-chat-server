@@ -1,9 +1,6 @@
 const UserModel = require('../models/users.model');
 
 class UserRepository {
-    constructor() {
-    }
-
     findAll() {
         return UserModel.find();
     }
@@ -14,8 +11,7 @@ class UserRepository {
     }
 
     findByEmail(email) {
-        console.log(email);
-        return UserModel.findOne({ email: email });
+        return UserModel.findOne({email: email});
     }
 }
 
