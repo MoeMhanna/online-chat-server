@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../middleware/multer-upload');
+const upload = require('../middleware/multer-upload-middleware');
 
 module.exports = ({userController}) => {
     router.get('/users', userController.getUsers.bind(userController));
