@@ -16,7 +16,7 @@ app.use(express.json());
 setupChatSocket(server);
 
 const userRoutes = require('./routes/user-routes')(container.cradle);
-app.use('/api/users', userRoutes);
+app.use('/api', userRoutes);
 
 const messageRoutes = require('./routes/messages-routes')(container.cradle);
 app.use('/api', messageRoutes);
