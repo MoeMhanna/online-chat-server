@@ -36,22 +36,17 @@ class AuthController {
 
     async login(req, res) {
         try {
-            // const {email, password} = req.body;
-            //
-            // console.log(req.body);
-            //
-            // const user = await this.userService.getUserByEmail(email);
-            // if (!user) {
-            //     return res.status(401).json({message: 'Invalid email or password'});
-            // }
-            //
-            // const isMatch = await bcrypt.compare(password, user.password);
-            // if (!isMatch) {
-            //     return res.status(401).json({message: 'Invalid email or password'});
-            // }
-            //
-            // const payload = {userId: user._id};
-            const token = jwt.sign("payload", process.env.JWT_SECRET);
+            const {email, password} = req.body;
+
+            console.log(req.body);
+
+            const user = await this.userService.getUserByEmail(email);
+            if (!user || (password !== user.password)) {
+                return res.status(401).json({message: 'Invalid email or password'});
+            }
+
+            const payload = {userId: user._id, username: user.username, email: user.email};
+            const token = jwt.sign(payload, process.env.JWT_SECRET);
 
             res.json({token});
         } catch (error) {
