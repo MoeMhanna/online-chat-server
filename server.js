@@ -26,6 +26,9 @@ app.use('/api', messageRoutes);
 const authRoutes = require('./routes/auth-routes')(container.cradle);
 app.use('/api', authRoutes);
 
+const chatRoutes = require('./routes/chats-routes')(container.cradle);
+app.use('/api', chatRoutes);
+
 server.listen(process.env.PORT, () => {
     console.log("Server is running on port 3000")
 })

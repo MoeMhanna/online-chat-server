@@ -1,10 +1,19 @@
+const UserDto = require("../dto/users.dto");
+
 class UserServices {
     constructor({userRepository}) {
         this.userRepository = userRepository;
     }
 
-    getAllUsers() {
-        return this.userRepository.findAll();
+    async getAllUsers() {
+        try {
+            const allUsers = await this.userRepository.findAll();
+            return allUsers.map((user) => {
+                return new UserDto(user.id, user.username, user.firstname, user.lastname, user.email);
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     async createUser(data) {

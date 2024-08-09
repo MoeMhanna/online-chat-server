@@ -13,7 +13,7 @@ class AuthController {
             if (error) {
                 return res.status(400).json({message: error.details.map(detail => detail.message).join(', ')});
             }
-            const {username, email, password} = req.body;
+            const {username, firstname, lastname, email, password} = req.body;
             const existingUser = await this.userService.getUserByEmail(email);
             if (existingUser) {
                 return res.status(409).json({message: 'User already exists'});
@@ -22,6 +22,8 @@ class AuthController {
             const profilePicture = req.file ? {data: req.file.buffer, contentType: req.file.mimetype} : null;
             const user = await this.userService.createUser({
                 username,
+                firstname,
+                lastname,
                 email,
                 password,
                 profilePicture: profilePicture,
@@ -37,7 +39,6 @@ class AuthController {
     async login(req, res) {
         try {
             const {email, password} = req.body;
-            console.log(req.body);
             const user = await this.userService.getUserByEmail(email);
             if (!user || (password !== user.password)) {
                 return res.status(401).json({message: 'Invalid email or password'});

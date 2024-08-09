@@ -3,13 +3,13 @@ class MessagesController {
         this.messagesServices = messagesServices;
     }
 
-    async getMessages(req, res, next) {
+    async getMessages(req, res) {
         try {
-            const {from, to} = req.query;
-            const projectedMessages = await this.messagesServices.getMessages(from, to);
+            const {myId, to} = req.query;
+            const projectedMessages = await this.messagesServices.getPrivateMessages(myId, to);
             res.json(projectedMessages);
-        } catch (ex) {
-            next(ex);
+        } catch (err) {
+            console.log(err);
         }
     }
 }
