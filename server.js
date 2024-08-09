@@ -1,6 +1,7 @@
 const container = require('./di-container');
 const express = require("express")
 const http = require("http");
+const corsConfig = require('./middleware/cors-config-middleware');
 
 const connectDB = require('./database');
 const setupChatSocket = require('./sockets/chat-sockets/chat-socket');
@@ -10,10 +11,11 @@ const app = express()
 connectDB();
 
 const server = http.createServer(app);
-app.use(express.json())
-
 app.use(express.json());
+
 setupChatSocket(server);
+
+app.use(corsConfig);
 
 const userRoutes = require('./routes/user-routes')(container.cradle);
 app.use('/api', userRoutes);
