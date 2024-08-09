@@ -22,8 +22,7 @@ class UsersController {
             }
             const profilePicture = req.file ? {data: req.file.buffer, contentType: req.file.mimetype} : null;
             const user = await this.userService.createUser({
-                ...req.body,
-                profilePicture: profilePicture,
+                ...req.body, profilePicture: profilePicture,
             });
             res.status(201).json(user);
         } catch (error) {

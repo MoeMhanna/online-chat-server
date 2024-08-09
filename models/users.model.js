@@ -12,6 +12,18 @@ const userSchema = new schema({
         minlength: 3,
         maxlength: 255
     },
+    firstname: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 255
+    },
+    lastname: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 255
+    },
     email: {
         type: String,
         required: true,
